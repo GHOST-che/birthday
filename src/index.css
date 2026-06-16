@@ -1,0 +1,808 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   BASE
+   ======================================== */
+@layer base {
+  body {
+    margin: 0;
+    background-color: #000000;
+    color: #e2e2e2;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+/* ========================================
+   SCÈNES
+   ======================================== */
+.scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 10;
+}
+
+.scene.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 20;
+}
+
+/* ========================================
+   GLASSMORPHISM
+   ======================================== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(255, 20, 147, 0.15);
+}
+
+/* ========================================
+   TEXTE SHIMMER
+   ======================================== */
+.shimmer-text {
+  background: linear-gradient(90deg, #FF69B4, #FFD700, #FF69B4);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* ========================================
+   BOUTON FLOTTANT
+   ======================================== */
+.float-btn {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ========================================
+   CŒUR FLOTTANT
+   ======================================== */
+@keyframes heart-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+.heart-float {
+  animation: heart-float 1.5s ease-in-out infinite;
+}
+
+/* ========================================
+   TAILLES DE TEXTE RESPONSIVES
+   ======================================== */
+.countdown-text {
+  font-size: clamp(80px, 25vw, 160px);
+  line-height: 1;
+}
+
+.age-title {
+  font-size: clamp(48px, 15vw, 100px);
+  line-height: 1.1;
+}
+
+/* ========================================
+   FLASH BLANC
+   ======================================== */
+.flash-overlay {
+  transition: opacity 0.15s ease-out;
+}
+
+/* ========================================
+   ÉTINCELLES
+   ======================================== */
+@keyframes sparkle-fade {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #FFD700;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 10px #FFD700;
+  animation: sparkle-fade 1s ease-out forwards;
+}
+
+/* ========================================
+   PÉTALES
+   ======================================== */
+.petal {
+  position: absolute;
+  top: -10%;
+  background: radial-gradient(circle, #FF69B4, #FF1493);
+  border-radius: 50% 0 50% 50%;
+  animation: fall linear infinite;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg) translateX(0);
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg) translateX(50px);
+  }
+}
+
+/* ========================================
+   MATERIAL SYMBOLS
+   ======================================== */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================
+   BOUTONS FLÈCHES
+   ======================================== */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  width: clamp(32px, 5vw, 56px);
+  height: clamp(32px, 5vw, 56px);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFD700;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.nav-arrow:hover {
+  background: rgba(255, 20, 147, 0.6);
+  border-color: #FFD700;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.nav-arrow-left {
+  left: clamp(4px, 2vw, 20px);
+}
+
+.nav-arrow-right {
+  right: clamp(4px, 2vw, 20px);
+}
+
+.nav-arrow .material-symbols-outlined {
+  font-size: clamp(18px, 2.5vw, 32px);
+}
+
+/* ========================================
+   EFFET DE BRIS D'ÉCRAN
+   ======================================== */
+
+/* Fissures réalistes */
+@keyframes crackAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(5deg);
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Flash d'impact */
+.impact-flash-realistic {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.8) 0%,
+    rgba(255, 105, 180, 0.4) 20%,
+    rgba(255, 20, 147, 0.2) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  animation: impactFlashRealistic 0.6s ease forwards;
+  z-index: 100;
+  filter: blur(5px);
+}
+
+@keyframes impactFlashRealistic {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3.5);
+    opacity: 0;
+  }
+}
+
+/* Glow d'impact */
+.impact-glow {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.15) 0%,
+    rgba(255, 105, 180, 0.08) 30%,
+    rgba(255, 20, 147, 0.04) 60%,
+    transparent 80%
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: glowPulse 1.5s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+/* Débris de verre */
+.glass-shard-realistic {
+  position: fixed;
+  pointer-events: none;
+  border: 1px solid;
+  border-radius: 2px;
+  z-index: 100;
+  opacity: 0;
+  animation: shardFlyRealistic 1.5s ease forwards;
+  transform-origin: center;
+  clip-path: polygon(
+    0% 0%,
+    60% 10%,
+    100% 30%,
+    80% 60%,
+    90% 100%,
+    30% 80%,
+    0% 50%
+  );
+}
+
+@keyframes shardFlyRealistic {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0deg) scale(0.5);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0);
+  }
+}
+
+/* Overlay de verre brisé */
+.shattered-overlay-realistic {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 49;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255, 255, 255, 0.01) 3px,
+      rgba(255, 255, 255, 0.01) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(255, 255, 255, 0.01) 3px,
+      rgba(255, 255, 255, 0.01) 4px
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 215, 0, 0.03) 0%,
+      transparent 70%
+    );
+  animation: glassShimmerRealistic 3s ease-in-out infinite;
+}
+
+@keyframes glassShimmerRealistic {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Vibration de l'écran */
+@keyframes screenShake {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-4px, -3px); }
+  20% { transform: translate(6px, 4px); }
+  30% { transform: translate(-8px, -5px); }
+  40% { transform: translate(10px, 6px); }
+  50% { transform: translate(-6px, -4px); }
+  60% { transform: translate(4px, 3px); }
+  70% { transform: translate(-3px, -2px); }
+  80% { transform: translate(2px, 1px); }
+  90% { transform: translate(-1px, -0.5px); }
+  100% { transform: translate(0, 0); }
+}
+
+.vibrating {
+  animation: screenShake 0.3s ease-in-out;
+}
+
+/* ========================================
+   LIVRE RÉALISTE
+   ======================================== */
+
+/* Livre fermé - effet 3D */
+.book-closed {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.book-closed:hover {
+  transform: translateY(-8px) rotateY(-2deg) scale(1.02);
+}
+
+/* Conteneur du livre avec effet 3D */
+.book-container {
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+}
+
+.book-container.closing {
+  transform: perspective(1200px) rotateY(180deg) scale(0.8) !important;
+  opacity: 0 !important;
+}
+
+.book-container.opening {
+  transform: perspective(1200px) rotateY(0deg) scale(1) !important;
+  opacity: 1 !important;
+}
+
+/* Animation d'ouverture SMOOTH */
+.book-opening {
+  animation: bookOpenSmooth 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes bookOpenSmooth {
+  0% {
+    transform: perspective(1200px) rotateY(180deg) scale(0.7);
+    opacity: 0;
+  }
+  30% {
+    transform: perspective(1200px) rotateY(120deg) scale(0.8);
+    opacity: 0.5;
+  }
+  60% {
+    transform: perspective(1200px) rotateY(60deg) scale(0.95);
+    opacity: 0.8;
+  }
+  100% {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Animation de fermeture SMOOTH */
+.book-closing {
+  animation: bookCloseSmooth 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes bookCloseSmooth {
+  0% {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: perspective(1200px) rotateY(60deg) scale(0.95);
+    opacity: 0.8;
+  }
+  70% {
+    transform: perspective(1200px) rotateY(120deg) scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: perspective(1200px) rotateY(180deg) scale(0.7);
+    opacity: 0;
+  }
+}
+
+/* Flipbook container */
+.flipbook-container {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 3/4 !important;
+  max-height: 70vh !important;
+  margin: 0 auto !important;
+  border-radius: 16px !important;
+  box-shadow: 
+    0 30px 80px rgba(255, 20, 147, 0.25),
+    0 0 60px rgba(255, 20, 147, 0.05) !important;
+  animation: bookAppear 0.8s ease forwards;
+}
+
+@keyframes bookAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Pages du livre */
+.flipbook-container .page {
+  background: #1a1a1a !important;
+  border-radius: 16px !important;
+  box-shadow: 
+    0 4px 30px rgba(255, 20, 147, 0.1),
+    inset 0 0 80px rgba(255, 20, 147, 0.02) !important;
+  border: 1px solid rgba(255, 215, 0, 0.06) !important;
+  overflow: hidden !important;
+  transition: all 0.5s ease !important;
+}
+
+/* Effet de page qui se soulève */
+.flipbook-container .page.flipping {
+  transform: perspective(1500px) rotateY(-6deg) scale(1.02) !important;
+  box-shadow: 
+    0 40px 100px rgba(255, 20, 147, 0.35),
+    -20px 0 50px rgba(255, 20, 147, 0.1) !important;
+  transition: transform 0.5s ease !important;
+}
+
+/* Coin de page décoratif */
+.flipbook-container .page::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, transparent 50%, rgba(255, 215, 0, 0.04) 50%);
+  pointer-events: none;
+  border-radius: 0 0 16px 0;
+}
+
+/* Effet de brillance sur les pages */
+.flipbook-container .page::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    ellipse at 30% 20%,
+    rgba(255, 215, 0, 0.03) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 10;
+}
+
+.flipbook-container .page:hover::before {
+  opacity: 1;
+}
+
+/* Hover sur les pages */
+.flipbook-container .page:hover {
+  transform: scale(1.015) !important;
+  box-shadow: 
+    0 15px 50px rgba(255, 20, 147, 0.3),
+    0 0 80px rgba(255, 20, 147, 0.05) !important;
+  z-index: 20 !important;
+}
+
+/* Images dans les pages */
+.flipbook-container .page img,
+.flipbook-container .page video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.7s ease !important;
+}
+
+.flipbook-container .page:hover img,
+.flipbook-container .page:hover video {
+  transform: scale(1.05) !important;
+}
+
+/* Animation des pages */
+@keyframes pageReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) rotateY(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+.flipbook-container .page {
+  animation: pageReveal 0.5s ease forwards;
+}
+
+/* ========================================
+   RESPONSIVE GLOBAL
+   ======================================== */
+
+/* Très petits écrans (moins de 400px) */
+@media (max-width: 399px) {
+  .flipbook-container {
+    aspect-ratio: 3/4 !important;
+    max-height: 45vh !important;
+    border-radius: 10px !important;
+  }
+  .book-closed {
+    width: 140px !important;
+  }
+  .impact-flash-realistic {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* Mobiles (400px - 639px) */
+@media (max-width: 640px) {
+  .flipbook-container {
+    aspect-ratio: 3/4 !important;
+    max-height: 50vh !important;
+    border-radius: 12px !important;
+  }
+  .book-closed {
+    width: 160px !important;
+  }
+  .impact-flash-realistic {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* Tablettes (641px - 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .flipbook-container {
+    aspect-ratio: 4/3 !important;
+    max-height: 60vh !important;
+  }
+  .book-closed {
+    width: 260px !important;
+  }
+}
+
+/* Desktop (1025px et plus) */
+@media (min-width: 1025px) {
+  .flipbook-container {
+    aspect-ratio: 4/3 !important;
+    max-height: 75vh !important;
+  }
+  .book-closed {
+    width: 380px !important;
+  }
+}
+
+/* ========================================
+   GALERIE - RESPONSIVE
+   ======================================== */
+.gallery-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 12px 8px;
+  gap: 16px;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  scroll-behavior: smooth;
+}
+
+.gallery-container:active {
+  cursor: grabbing;
+}
+
+.gallery-container::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-card {
+  scroll-snap-align: center;
+  flex: 0 0 85%;
+  max-width: 280px;
+  aspect-ratio: 3/4;
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+}
+
+.gallery-card:hover {
+  transform: scale(1.05) rotate(0deg) !important;
+  z-index: 50;
+  box-shadow: 0 12px 40px 0 rgba(255, 20, 147, 0.35);
+}
+
+@media (max-width: 399px) {
+  .gallery-container {
+    padding: 8px 4px;
+    gap: 12px;
+  }
+  .gallery-card {
+    flex: 0 0 90%;
+    max-width: 220px;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 639px) {
+  .gallery-container {
+    padding: 12px 8px;
+    gap: 14px;
+  }
+  .gallery-card {
+    flex: 0 0 85%;
+    max-width: 260px;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 767px) {
+  .gallery-container {
+    padding: 16px 12px;
+    gap: 18px;
+  }
+  .gallery-card {
+    flex: 0 0 60%;
+    max-width: 320px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gallery-container {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+  .gallery-card {
+    flex: 0 0 45%;
+    max-width: 360px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .gallery-container {
+    padding: 24px 20px;
+    gap: 24px;
+  }
+  .gallery-card {
+    flex: 0 0 30%;
+    max-width: 380px;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .gallery-container {
+    padding: 28px 24px;
+    gap: 28px;
+  }
+  .gallery-card {
+    flex: 0 0 25%;
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .gallery-container {
+    padding: 32px 28px;
+    gap: 32px;
+  }
+  .gallery-card {
+    flex: 0 0 20%;
+    max-width: 420px;
+  }
+}
+
+/* ========================================
+   FISSURES (anciennes - gardé pour compatibilité)
+   ======================================== */
+.crack-svg {
+  position: absolute;
+  pointer-events: none;
+  z-index: 100;
+  filter: drop-shadow(0 0 8px #FF69B4);
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
